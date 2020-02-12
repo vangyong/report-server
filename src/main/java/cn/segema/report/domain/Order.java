@@ -60,7 +60,7 @@ public class Order {
 	
 	@ApiModelProperty(value="运单总数")
 	@Column(name = "express_total")
-	private int expressTotal;
+	private Integer expressTotal;
 	
 	
 	@ApiModelProperty(value="支付宝帐号")

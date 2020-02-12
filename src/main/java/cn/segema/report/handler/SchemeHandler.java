@@ -1,6 +1,5 @@
 package cn.segema.report.handler;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import cn.segema.report.domain.Address;
 import cn.segema.report.domain.Scheme;
 import cn.segema.report.repository.SchemeRepository;
-import cn.segema.report.vo.User;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -26,7 +24,15 @@ public class SchemeHandler {
 	@Resource
 	private SchemeRepository schemeRepository;
 
-	public Mono<ServerResponse> findListByScheme(ServerRequest request) {
+	public  Mono<ServerResponse> findById(ServerRequest request) {
+		if(request.pathVariable("schemeId")!=null) {
+			Optional<Scheme> scheme = schemeRepository.findById(request.pathVariable("schemeId"));
+			return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(BodyInserters.fromObject(scheme));
+		}
+		return ServerResponse.badRequest().contentType(MediaType.APPLICATION_JSON_UTF8).body(BodyInserters.fromObject(null));
+	}
+	
+	public Mono<ServerResponse> findList(ServerRequest request) {
 		Scheme scheme = new Scheme();
 		if(request.queryParam("addressId")!=null) {
 			String addressId = String.valueOf(request.queryParam("addressId"));
@@ -73,12 +79,6 @@ public class SchemeHandler {
 			return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(BodyInserters.fromObject(scheme.get()));
 		}
 		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(BodyInserters.fromObject(null));
-	}
-
-	public Mono<ServerResponse> findByPage(ServerRequest request) {
-		User user = new User();
-		user.setId(new BigInteger("2"));
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(BodyInserters.fromObject(user));
 	}
 
 }

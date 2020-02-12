@@ -14,7 +14,7 @@ import cn.segema.report.domain.Order;
 @Repository
 public interface OrderRepository extends PagingAndSortingRepository<Order, String>,JpaRepository<Order, String>,JpaSpecificationExecutor<Order>  {
 	
-	 @Query(value = "SELECT * FROM report_scheme WHERE if(:#{#scheme.addressId}!='',address_id = :#{#scheme.addressId},1=1)"
+	 @Query(value = "SELECT * FROM report_order WHERE if(:#{#order.addressId}!='',address_id = :#{#order.addressId},1=1)"
 	 		+ "AND if(:#{#order.nickName}!='',nick_name = :#{#order.nickName},1=1) AND if(:#{#order.schemeId}!='',scheme_id = :#{#order.schemeId},1=1)"
 	 		+ "AND if(:#{#order.alipayAccount}!='',alipay_account = :#{#order.alipayAccount},1=1) ORDER BY create_time DESC", nativeQuery = true) 
 	 public List<Order> findListByOrder(@Param("order") Order order); 

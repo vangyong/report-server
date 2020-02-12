@@ -19,10 +19,14 @@ public class Address {
 	@Id
 	@Column(name = "address_id")
 	private String addressId;
+	
+	@ApiModelProperty(value = "简称")
+	@Column(name = "short_name")
+	private String shortName;
 
 	@ApiModelProperty(value = "收货地址明细")
-	@Column(name = "address_detail")
-	private String addressDetail;
+	@Column(name = "detail_content")
+	private String detailContent;
 
 	@ApiModelProperty(value = "状态")
 	@Column(name = "status")
