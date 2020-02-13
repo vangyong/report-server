@@ -31,17 +31,17 @@ public class RouterConfig {
 	
 	@Bean
 	public RouterFunction<ServerResponse> routerFunction() {
-		return RouterFunctions.route(GET("/v2/address/list"), addressHandler::findList)
-				.andRoute(POST("/v2/address").and(accept(MediaType.APPLICATION_JSON)), addressHandler::add)
-				.andRoute(PUT("/v2/address").and(accept(MediaType.APPLICATION_JSON)), addressHandler::edit)
-				.andRoute(GET("/v2/address/{addressId}").and(accept(MediaType.APPLICATION_JSON)), addressHandler::findById)
-				.andRoute(GET("/v2/scheme/list").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::findList)
-				.andRoute(POST("/v2/scheme").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::add)
-				.andRoute(PUT("/v2/scheme").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::edit)
-				.andRoute(GET("/v2/scheme/{schemeId}").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::findById)
-				.andRoute(GET("/v2/order/list").and(accept(MediaType.APPLICATION_JSON)), orderHandler::findList)
-				.andRoute(POST("/v2/order").and(accept(MediaType.APPLICATION_JSON)), orderHandler::add)
-				.andRoute(GET("/v2/order").and(accept(MediaType.APPLICATION_JSON)), orderHandler::edit)
-				.andRoute(GET("/v2/order/{orderId}").and(accept(MediaType.APPLICATION_JSON)), orderHandler::findById);
+		return RouterFunctions.route(GET("/v2/user/list"), addressHandler::findList);
+				//.andRoute(POST("/v2/address").and(accept(MediaType.APPLICATION_JSON)), addressHandler::add)
+				//.andRoute(PUT("/v2/address").and(accept(MediaType.APPLICATION_JSON)), addressHandler::edit)
+				//.andRoute(GET("/v2/address/{addressId}").and(accept(MediaType.APPLICATION_JSON)), addressHandler::findById)
+				//.andRoute(GET("/v2/scheme/list").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::findList)
+				//.andRoute(POST("/v2/scheme").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::add)
+				//.andRoute(PUT("/v2/scheme").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::edit)
+				//.andRoute(GET("/v2/scheme/{schemeId}").and(accept(MediaType.APPLICATION_JSON)), schemeHandler::findById)
+				//.andRoute(GET("/v2/order/list").and(accept(MediaType.APPLICATION_JSON)), orderHandler::findList)
+				//.andRoute(POST("/v2/order").and(accept(MediaType.APPLICATION_JSON)), orderHandler::add)
+				//.andRoute(GET("/v2/order").and(accept(MediaType.APPLICATION_JSON)), orderHandler::edit)
+				//.andRoute(GET("/v2/order/{orderId}").and(accept(MediaType.APPLICATION_JSON)), orderHandler::findById);
 	}
 }
