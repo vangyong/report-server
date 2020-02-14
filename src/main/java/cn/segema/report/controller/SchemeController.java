@@ -2,6 +2,7 @@ package cn.segema.report.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,11 @@ public class SchemeController {
 	private SchemeRepository schemeRepository;
 
 	@ApiOperation(value = "根据id获取方案", notes = "根据id获取方案")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "addressId", value = "方案id", required = true, paramType = "path") })
-	@GetMapping("/{addressId}")
-	public ResponseEntity findById(@PathVariable String addressId) {
-		Optional<Scheme> scheme = this.schemeRepository.findById(addressId);
-		return new ResponseEntity(scheme, HttpStatus.OK);
+	@ApiImplicitParams({ @ApiImplicitParam(name = "schemeId", value = "方案id", required = true, paramType = "path") })
+	@GetMapping("/{schemeId}")
+	public ResponseEntity findById(@PathVariable String schemeId) {
+		Optional<Scheme> scheme = this.schemeRepository.findById(schemeId);
+		return new ResponseEntity(scheme.get(), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "获取方案列表", notes = "获取方案列表")
@@ -49,6 +50,7 @@ public class SchemeController {
 	@ApiOperation(value = "新增方案", notes = "新增方案")
 	@PostMapping
 	public ResponseEntity add(@RequestBody Scheme scheme) {
+		scheme.setSchemeId(UUID.randomUUID().toString());
 		schemeRepository.save(scheme);
 		return new ResponseEntity(scheme, HttpStatus.OK);
 	}
@@ -56,11 +58,11 @@ public class SchemeController {
 	@ApiOperation(value = "编辑方案", notes = "编辑方案")
 	@PutMapping
 	public ResponseEntity edit(@RequestBody Scheme scheme) {
-		Optional<Scheme> oldProduct = schemeRepository.findById(scheme.getAddressId());
-		if (oldProduct.isPresent()) {
-			BeanUtils.copyProperties(scheme, oldProduct.get(), "createTime");
-			schemeRepository.save(oldProduct.get());
-			return new ResponseEntity(oldProduct.get(), HttpStatus.OK);
+		Optional<Scheme> oldScheme = schemeRepository.findById(scheme.getSchemeId());
+		if (oldScheme.isPresent()) {
+			BeanUtils.copyProperties(scheme, oldScheme.get(), "createTime");
+			schemeRepository.save(oldScheme.get());
+			return new ResponseEntity(oldScheme.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity("can't find chanel", HttpStatus.BAD_REQUEST);
 		}

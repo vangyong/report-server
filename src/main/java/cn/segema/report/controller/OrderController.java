@@ -2,6 +2,7 @@ package cn.segema.report.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class OrderController {
 	@ApiOperation(value = "新增报单", notes = "新增报单")
 	@PostMapping
 	public ResponseEntity add(@RequestBody Order order) {
+		order.setOrderId(UUID.randomUUID().toString());
 		orderRepository.save(order);
 		return new ResponseEntity(order, HttpStatus.OK);
 	}

@@ -2,6 +2,7 @@ package cn.segema.report.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,10 @@ public class AddressController {
 
 	@ApiOperation(value = "新增收货地址", notes = "新增收货地址")
 	@PostMapping
-	public ResponseEntity add(@RequestBody Address Address) {
-		addressRepository.save(Address);
-		return new ResponseEntity(Address, HttpStatus.OK);
+	public ResponseEntity add(@RequestBody Address address) {
+		address.setAddressId(UUID.randomUUID().toString());
+		addressRepository.save(address);
+		return new ResponseEntity(address, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "编辑收货地址", notes = "编辑收货地址")
