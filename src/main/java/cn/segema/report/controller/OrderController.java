@@ -47,6 +47,14 @@ public class OrderController {
 		List<Order> orderList = orderRepository.findListByOrder(order);
 		return new ResponseEntity(orderList, HttpStatus.OK);
 	}
+	
+	
+	@ApiOperation(value = "模糊查询报单列表", notes = "模糊查询报单列表")
+	@GetMapping("/query")
+	public ResponseEntity findQuery(Order order) {
+		List<Order> orderList = orderRepository.findListByQuery(order);
+		return new ResponseEntity(orderList, HttpStatus.OK);
+	}
 
 	@ApiOperation(value = "新增报单", notes = "新增报单")
 	@PostMapping
