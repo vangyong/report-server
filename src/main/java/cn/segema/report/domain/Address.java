@@ -25,8 +25,8 @@ public class Address {
 	private String shortName;
 
 	@ApiModelProperty(value = "收货地址明细")
-	@Column(name = "detail_content")
-	private String detailContent;
+	@Column(name = "address_detail")
+	private String addressDetail;
 
 	@ApiModelProperty(value = "状态")
 	@Column(name = "status")

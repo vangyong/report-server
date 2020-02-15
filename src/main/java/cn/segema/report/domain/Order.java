@@ -78,5 +78,9 @@ public class Order {
 	@ApiModelProperty(value="创建时间")
 	@Column(name = "create_time")
 	private Date createTime;
+	
+	@ApiModelProperty(value="更新时间")
+	@Column(name = "update_time")
+	private Date updateTime;
 
 }

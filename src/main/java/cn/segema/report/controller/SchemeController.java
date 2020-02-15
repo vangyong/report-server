@@ -1,5 +1,6 @@
 package cn.segema.report.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,6 +52,7 @@ public class SchemeController {
 	@PostMapping
 	public ResponseEntity add(@RequestBody Scheme scheme) {
 		scheme.setSchemeId(UUID.randomUUID().toString());
+		scheme.setCreateTime(new Date());
 		schemeRepository.save(scheme);
 		return new ResponseEntity(scheme, HttpStatus.OK);
 	}

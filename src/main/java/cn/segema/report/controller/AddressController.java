@@ -1,5 +1,6 @@
 package cn.segema.report.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,6 +52,7 @@ public class AddressController {
 	@PostMapping
 	public ResponseEntity add(@RequestBody Address address) {
 		address.setAddressId(UUID.randomUUID().toString());
+		address.setCreateTime(new Date());
 		addressRepository.save(address);
 		return new ResponseEntity(address, HttpStatus.OK);
 	}

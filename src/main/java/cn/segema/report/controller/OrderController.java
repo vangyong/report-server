@@ -1,5 +1,6 @@
 package cn.segema.report.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "报单")
 @RestController
-@RequestMapping(value = "/v2/Order")
+@RequestMapping(value = "/v2/order")
 public class OrderController {
 
 	@Autowired
@@ -51,6 +52,7 @@ public class OrderController {
 	@PostMapping
 	public ResponseEntity add(@RequestBody Order order) {
 		order.setOrderId(UUID.randomUUID().toString());
+		order.setCreateTime(new Date());
 		orderRepository.save(order);
 		return new ResponseEntity(order, HttpStatus.OK);
 	}
@@ -58,11 +60,12 @@ public class OrderController {
 	@ApiOperation(value = "编辑报单", notes = "编辑报单")
 	@PutMapping
 	public ResponseEntity edit(@RequestBody Order order) {
-		Optional<Order> oldProduct = orderRepository.findById(order.getOrderId());
-		if (oldProduct.isPresent()) {
-			BeanUtils.copyProperties(order, oldProduct.get(), "createTime");
-			orderRepository.save(oldProduct.get());
-			return new ResponseEntity(oldProduct.get(), HttpStatus.OK);
+		Optional<Order> oldOrder = orderRepository.findById(order.getOrderId());
+		if (oldOrder.isPresent()) {
+			BeanUtils.copyProperties(order, oldOrder.get(), "createTime");
+			oldOrder.get().setUpdateTime(new Date());
+			orderRepository.save(oldOrder.get());
+			return new ResponseEntity(oldOrder.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity("can't find chanel", HttpStatus.BAD_REQUEST);
 		}

@@ -14,6 +14,6 @@ import cn.segema.report.domain.Address;
 @Repository
 public interface AddressRepository extends PagingAndSortingRepository<Address, String>,JpaRepository<Address, String>,JpaSpecificationExecutor<Address>  {
 	
-	 @Query(value = "SELECT * FROM report_address WHERE if(:#{#address.status}!='',status = :#{#address.status},1=1) ORDER BY create_time DESC", nativeQuery = true) 
+	 @Query(value = "SELECT * FROM report_address WHERE if(:#{#address.status}!='',status = :#{#address.status},1=1) ORDER BY status,create_time DESC", nativeQuery = true) 
 	 public List<Address> findListByAddress(@Param("address") Address address); 
 }
