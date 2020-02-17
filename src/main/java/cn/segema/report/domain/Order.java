@@ -54,11 +54,15 @@ public class Order {
 	@Column(name = "express_order")
 	private String expressOrder;
 	
-	@ApiModelProperty(value="支付金额")
+	@ApiModelProperty(value="券后金额")
+	@Column(name = "couponlate_money")
+	private BigDecimal couponLateMoney;
+	
+	@ApiModelProperty(value="应返总额")
 	@Column(name = "pay_money")
 	private BigDecimal payMoney;
 	
-	@ApiModelProperty(value="运单总数")
+	@ApiModelProperty(value="几单")
 	@Column(name = "express_total")
 	private Integer expressTotal;
 	
